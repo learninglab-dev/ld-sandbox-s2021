@@ -6,9 +6,15 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
+    "framer-motion": "^3.3.0",
+    "lodash.debounce": "^4.0.8",
+    "lottie-react-web": "^2.2.2",
+    "lottie-web": "^5.7.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "theme-ui": "^0.6.0-alpha.7",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
