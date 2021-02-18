@@ -5,6 +5,7 @@ import AnimatedLetter from './Letter'
 import AnimatedBox from './Box'
 import { useMotionValue, motion } from 'framer-motion'
 import getScrubValues from '../utils/getScrubValues'
+import useScrub from '../hooks/useScrub'
 
 
 export default function Layout({ scrollPercent }) {
@@ -22,6 +23,25 @@ export default function Layout({ scrollPercent }) {
   ]
   getScrubValues(scrollPercent,0.9,1,nextSectionVals)
 
+  const leftSteps = [
+    {
+      init:5,
+      from:5,
+      to:20,
+      unit:'vw',
+      start:0.05,
+      end:0.25,
+    },
+    {
+      from:20,
+      to:5,
+      unit:'vw',
+      start:0.30,
+      end:0.50,
+    },
+  ]
+  const left = useScrub(leftSteps, scrollPercent)
+
   return (
     <main>
       <motion.section
@@ -36,6 +56,16 @@ export default function Layout({ scrollPercent }) {
           justifyContent:'flex-start',
           height:'100vh',
         }}>
+        <motion.div
+          style={{left:left}}
+          sx={{
+            position:'absolute',
+            height:'100px',
+            width:'100px',
+            bg:'Purple',
+            top:'10vh',
+          }}>
+        </motion.div>
         <motion.h1
           style={{opacity:opacity}}
           sx={{
