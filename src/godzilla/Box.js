@@ -61,7 +61,7 @@ export default function Box(props) {
             init:x,
             from:x,
             to:x-.25,
-            unit:'vW',
+            unit:'vw',
             start:startShake+(shakeSegment*i),
             end:startShake+(shakeSegment*(i+1)),
           }
@@ -71,7 +71,7 @@ export default function Box(props) {
           {
             from:x-.25,
             to:x,
-            unit:'vW',
+            unit:'vw',
             start:startShake+(shakeSegment*i),
             end:startShake+(shakeSegment*(i+1)),
           }

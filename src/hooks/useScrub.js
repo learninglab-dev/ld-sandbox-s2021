@@ -1,5 +1,4 @@
 import { useMotionValue } from 'framer-motion'
-import getScrubValues from '../utils/getScrubValues'
 import { useLayoutEffect } from 'react'
 
 

@@ -41,6 +41,44 @@ export default function Layout({ scrollPercent }) {
     },
   ]
   const left = useScrub(leftSteps, scrollPercent)
+  const circleSteps = [
+    {
+      init:5,
+      from:5,
+      to:95,
+      unit:'vw',
+      start:0.05,
+      end:0.50,
+    },
+    {
+      from:95,
+      to:5,
+      unit:'vw',
+      start:0.50,
+      end:0.95,
+    },
+  ]
+  const circleLeft = useScrub(circleSteps, scrollPercent)
+  const radiusSteps = [
+    {
+      init:100,
+      from:100,
+      to:200,
+      unit:'px',
+      start:0.05,
+      end:0.50,
+    },
+    {
+      from:200,
+      to:100,
+      unit:'px',
+      start:0.50,
+      end:0.95,
+    },
+  ]
+  const height = useScrub(radiusSteps, scrollPercent)
+  const width = useScrub(radiusSteps, scrollPercent)
+
 
   return (
     <main>
@@ -64,6 +102,19 @@ export default function Layout({ scrollPercent }) {
             width:'100px',
             bg:'Purple',
             top:'10vh',
+          }}>
+        </motion.div>
+        <motion.div
+          style={{
+            left:circleLeft,
+            height:height,
+            width:width,
+          }}
+          sx={{
+            position:'absolute',
+            bg:'Marigold',
+            top:'50vh',
+            borderRadius:'50%',
           }}>
         </motion.div>
         <motion.h1
