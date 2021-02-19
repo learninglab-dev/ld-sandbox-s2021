@@ -6,6 +6,8 @@ import AnimatedBox from './Box'
 import { useMotionValue, motion } from 'framer-motion'
 import getScrubValues from '../utils/getScrubValues'
 import useScrub from '../hooks/useScrub'
+import useScrubKeyframes from '../hooks/useScrubKeyframes'
+import useScene from '../hooks/useScene'
 
 
 export default function Layout({ scrollPercent }) {
@@ -23,61 +25,52 @@ export default function Layout({ scrollPercent }) {
   ]
   getScrubValues(scrollPercent,0.9,1,nextSectionVals)
 
-  const leftSteps = [
-    {
-      init:5,
-      from:5,
-      to:20,
-      unit:'vw',
-      start:0.05,
-      end:0.25,
+  const scene3 = useScene(3, scrollPercent)
+  const squareKeyframes = {
+    0:{left:5},
+    50:{left:25},
+    100:{left:5}
+  }
+  const squareParams = {
+    init:true,
+    unit:'vw',
+    type:'left',
+    keyframes:squareKeyframes
+  }
+  const left = useScrubKeyframes(squareParams, scene3)
+
+  const scene2 = useScene(2, scrollPercent)
+  const circleKeyframes = {
+    0:{
+      left:5,
+      radius:100
     },
-    {
-      from:20,
-      to:5,
-      unit:'vw',
-      start:0.30,
-      end:0.50,
+    50:{
+      left:95,
     },
-  ]
-  const left = useScrub(leftSteps, scrollPercent)
-  const circleSteps = [
-    {
-      init:5,
-      from:5,
-      to:95,
-      unit:'vw',
-      start:0.05,
-      end:0.50,
+    75:{
+      radius:200,
     },
-    {
-      from:95,
-      to:5,
-      unit:'vw',
-      start:0.50,
-      end:0.95,
+    100:{
+      left:5,
+      radius:50
     },
-  ]
-  const circleLeft = useScrub(circleSteps, scrollPercent)
-  const radiusSteps = [
-    {
-      init:100,
-      from:100,
-      to:200,
-      unit:'px',
-      start:0.05,
-      end:0.50,
-    },
-    {
-      from:200,
-      to:100,
-      unit:'px',
-      start:0.50,
-      end:0.95,
-    },
-  ]
-  const height = useScrub(radiusSteps, scrollPercent)
-  const width = useScrub(radiusSteps, scrollPercent)
+  }
+  const circleParams = {
+    init:true,
+    unit:'vw',
+    type:'left',
+    keyframes:circleKeyframes
+  }
+  const circleLeft = useScrubKeyframes(circleParams, scene2)
+  const radiusParams = {
+    init:true,
+    unit:'px',
+    type:'radius',
+    keyframes:circleKeyframes
+  }
+  const height = useScrubKeyframes(radiusParams, scene2)
+  const width = useScrubKeyframes(radiusParams, scene2)
 
 
   return (
