@@ -1,36 +1,63 @@
 /** @jsxImportSource theme-ui */
 import React from 'react'
 import {
-  useMotionValue,
   useMotionTemplate,
   motion
 } from 'framer-motion'
-import getScrubValues from '../utils/getScrubValues'
+import useScrubKeyframes from '../hooks/useScrubKeyframes'
+import useScene from '../hooks/useScene'
 
 
 export default function Letter(props) {
     const {
       scrub,
       val,
-      start=0.02,
-      end=0.2,
+      start=2,
+      end=20,
       y=25,
       x='200px'
     } = props
-    const top = useMotionValue('-4vmin')
-    const opacity = useMotionValue(0)
-    const rotation = useMotionValue(0)
+
+    //relativize to the scene
+    const scene2Percent = useScene(2, scrub)
+    //a slightly more complex example of a keyframes object; with specific frame values coming in as props
+    const letterKeyframes = {
+      [start]:{
+        top:-4,
+        opacity:0,
+        rotation:0
+      },
+      [start+5]:{
+        opacity:1,
+      },
+      [end]:{
+        top:y,
+        rotation:720
+      },
+    }
+    const topParams = {
+      init:false,
+      unit:'vmin',
+      type:'top',
+      keyframes:letterKeyframes
+    }
+    const top = useScrubKeyframes(topParams, scene2Percent)
+    const opacityParams = {
+      init:true,
+      unit:'',
+      type:'opacity',
+      keyframes:letterKeyframes
+    }
+    const opacity = useScrubKeyframes(opacityParams, scene2Percent)
+    const rotationParams = {
+      init:false,
+      unit:'deg',
+      type:'rotation',
+      keyframes:letterKeyframes
+    }
+    const rotation = useScrubKeyframes(rotationParams, scene2Percent)
     const transform = useMotionTemplate`rotateY(${rotation})`
 
-    const letterOpacityVals = [
-      {val:opacity,from:0,to:1,unit:''}
-    ]
-    const letterMotionVals = [
-      {val:top,from:-4,to:y,unit:'vmin'},
-      {val:rotation,from:0,to:720,unit:'deg'}
-    ]
-    getScrubValues(scrub,start,start+.05,letterOpacityVals)
-    getScrubValues(scrub,start,end,letterMotionVals)
 
     return (
       <motion.div

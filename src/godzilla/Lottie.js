@@ -16,7 +16,7 @@ export default function LottiePlayer({ scrub }) {
     if (lottieContainer.current && !lottie.current) {
       lottie.current = Lottie.loadAnimation({
         container: lottieContainer.current,
-        renderer: 'svg',
+        renderer: 'canvas',
         loop: false,
         autoplay: false,
         animationData:godzilla
@@ -28,7 +28,7 @@ export default function LottiePlayer({ scrub }) {
 
   useEffect(() => {
     if (lottie.current) {
-      const scrubFrames = Math.round(scrub*1.5*frames.current)
+      const scrubFrames = scrub*1.5*frames.current
       if (scrubFrames >=  38) {
         lottie.current.goToAndStop(38, true)
         return

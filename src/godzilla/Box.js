@@ -1,10 +1,8 @@
 /** @jsxImportSource theme-ui */
 import React from 'react'
-import {
-  useMotionValue,
-  motion
-} from 'framer-motion'
-import getScrubValues from '../utils/getScrubValues'
+import { motion } from 'framer-motion'
+import useScrubKeyframes from '../hooks/useScrubKeyframes'
+import useScene from '../hooks/useScene'
 
 
 export default function Box(props) {
@@ -17,33 +15,77 @@ export default function Box(props) {
       y=25,
       x='200px'
     } = props
-    const top = useMotionValue(`${y}vh`)
-    const left = useMotionValue(`${x}vw`)
-    const opacity = useMotionValue(1)
 
-    const boxOutVals = [
-      {val:opacity,from:1,to:0,unit:''}
-    ]
-    const boxShakeLeftVals = [
-      {val:top,from:y,to:y+.25,unit:'vh'},
-      {val:left,from:x,to:x-.25,unit:'vw'}
-    ]
-    const boxShakeRightVals = [
-      {val:top,from:y+.25,to:y,unit:'vh'},
-      {val:left,from:x-.25,to:x,unit:'vw'}
-    ]
+    const scene3Percent = useScene(3, scrub)
+    //setup the shaking animation, which can ultimately be a built in function
     const shakeDuration = endShake-startShake
     const shakeSegment = shakeDuration/8
-    getScrubValues(scrub,startShake,startShake+shakeSegment,boxShakeLeftVals)
-    getScrubValues(scrub,startShake+shakeSegment,startShake+(shakeSegment*2),boxShakeRightVals)
-    getScrubValues(scrub,startShake+(shakeSegment*2),startShake+(shakeSegment*3),boxShakeLeftVals)
-    getScrubValues(scrub,startShake+(shakeSegment*3),startShake+(shakeSegment*4),boxShakeRightVals)
-    getScrubValues(scrub,startShake+(shakeSegment*4),startShake+(shakeSegment*5),boxShakeLeftVals)
-    getScrubValues(scrub,startShake+(shakeSegment*5),startShake+(shakeSegment*6),boxShakeRightVals)
-    getScrubValues(scrub,startShake+(shakeSegment*6),startShake+(shakeSegment*7),boxShakeLeftVals)
-    getScrubValues(scrub,startShake+(shakeSegment*7),startShake+(shakeSegment*8),boxShakeRightVals)
+    const boxKeyframes = {
+      [startShake]:{
+        y:y,
+        x:x
+      },
+      [startShake+shakeSegment]:{
+        y:y+.25,
+        x:x-.25
+      },
+      [startShake+(shakeSegment*2)]:{
+        y:y,
+        x:x
+      },
+      [startShake+(shakeSegment*3)]:{
+        y:y+.25,
+        x:x-.25
+      },
+      [startShake+(shakeSegment*4)]:{
+        y:y,
+        x:x
+      },
+      [startShake+(shakeSegment*5)]:{
+        y:y+.25,
+        x:x-.25
+      },
+      [startShake+(shakeSegment*6)]:{
+        y:y,
+        x:x
+      },
+      [startShake+(shakeSegment*7)]:{
+        y:y+.25,
+        x:x-.25
+      },
+      [endShake]:{
+        y:y,
+        x:x
+      },
+      [endShake+5]:{
+        opacity:1
+      },
+      [out]:{
+        opacity:0
+      },
+    }
+    const opacityParams = {
+      init:false,
+      unit:'',
+      type:'opacity',
+      keyframes:boxKeyframes
+    }
+    const opacity = useScrubKeyframes(opacityParams, scene3Percent)
+    const yParams = {
+      init:false,
+      unit:'vh',
+      type:'y',
+      keyframes:boxKeyframes
+    }
+    const top = useScrubKeyframes(yParams, scene3Percent)
+    const xParams = {
+      init:false,
+      unit:'vw',
+      type:'x',
+      keyframes:boxKeyframes
+    }
+    const left = useScrubKeyframes(xParams, scene3Percent)
 
-    getScrubValues(scrub,endShake+.05,out,boxOutVals)
 
     return (
       <motion.div
@@ -64,7 +106,7 @@ export default function Box(props) {
           p:'1vw',
           justifyContent:'center',
           alignItems:'center',
-          display:scrub >= startShake ? 'flex' : 'none'
+          display:scene3Percent > 0 ? 'flex' : 'none'
         }}>
         <motion.h3
           sx={{
