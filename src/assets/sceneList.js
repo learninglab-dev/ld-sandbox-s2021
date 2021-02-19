@@ -1,18 +1,18 @@
 const sceneList = {
   1: {
     from:0,
-    to:.25,
+    to:.50,
   },
   2: {
-    from:.25,
-    to:.50
-  },
-  3: {
-    from:.50,
+    from:.05,
     to:.75
   },
+  3: {
+    from:.55,
+    to:.8
+  },
   4: {
-    from:.75,
+    from:.9,
     to:1
   },
 }

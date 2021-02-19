@@ -4,7 +4,7 @@ import { useLayoutEffect } from 'react'
 
 const filter = (keyframes, type) => {
   return Object.keys(keyframes)
-    .filter( key => keyframes[key][type])
+    .filter( key => keyframes[key][type] !== undefined)
     .reduce((acc, key) => Object.assign(acc, { [key]: keyframes[key] }), {})
 }
 
@@ -31,18 +31,20 @@ export default function useScrubKeyframes(params, state) {
   } = params
 
   const validKfs = filter(keyframes, type)
+  console.log(validKfs)
   const currentIndex = Object.keys(validKfs)
     .indexOf(
       Object.keys(validKfs)
       .filter(validKfs => state*100 <= validKfs)[0]
     )
+    console.log(currentIndex)
   const currentSegment = currentIndex > 0 ?
     kfToSeg(currentIndex, validKfs, type) :
     currentIndex === 0 ?
       kfToSeg(1, validKfs, type) :
       kfToSeg(Object.keys(validKfs).length-1, validKfs, type)
 
-  const val = useMotionValue(init? keyframes[Object.keys(keyframes[0])] : null)
+  const val = useMotionValue(init? validKfs[Object.keys(validKfs)[0]][type] : '')
 
   useLayoutEffect(() => {
     const getScrubPercent = (current, start, end) => {
