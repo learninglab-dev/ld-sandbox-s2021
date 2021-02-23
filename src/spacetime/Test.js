@@ -9,10 +9,17 @@ const Test = () => {
     50: .50,
     100: 1
   }
-  const test = useScrub(keyframes, progress.percent)
+  const opacity = useScrub(keyframes, progress.percent)
+  const leftkfs = {
+    0: '100px',
+    25: '200px',
+    50: '-100px',
+    100: '100px'
+  }
+  const left = useScrub(leftkfs, progress.percent)
   const sizeKeyframes = {
     0: '5vw',
-    50: '10vw',
+    50: '30vw',
     100: '5vw'
   }
   const size = useScrub(sizeKeyframes, progress.percent, [.5,.75])
@@ -23,18 +30,27 @@ const Test = () => {
     100: '100px'
   }
   const width = useScrub(widthkfs, progress.percent)
+  const colorKfs = {
+      0: 'rgba(255,0,0,.75)',
+      50: 'rgba(0,255,0,1)',
+      100: 'rgba(0,0,255,.5)'
+    }
+    const color = useScrub(colorKfs, progress.percent)
 
   return (
     <motion.div
       style={{
         fontSize:size,
-        opacity:test
+        position:'absolute',
+        top:'0px',
+        left:left,
+        opacity:opacity
       }}>
       hello
       <motion.div
       style={{
         width:width,
-        backgroundColor: 'red',
+        backgroundColor:color,
         height:'200px'
       }}>
       </motion.div>
