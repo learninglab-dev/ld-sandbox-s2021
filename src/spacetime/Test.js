@@ -6,7 +6,7 @@ const Test = () => {
   const progress = useWheelY(5)
   const keyframes = {
     0: .25,
-    50: .50,
+    50: .5,
     100: 1
   }
   const opacity = useScrub(keyframes, progress.percent)
@@ -24,10 +24,10 @@ const Test = () => {
   }
   const size = useScrub(sizeKeyframes, progress.percent, [.5,.75])
   const widthkfs = {
-    0: '100px',
-    25: '200px',
-    50: '500px',
-    100: '100px'
+    0: '10%',
+    25: '20%',
+    50: '50%',
+    100: '10%'
   }
   const width = useScrub(widthkfs, progress.percent)
   const colorKfs = {
@@ -44,7 +44,8 @@ const Test = () => {
         position:'absolute',
         top:'0px',
         left:left,
-        opacity:opacity
+        opacity:opacity,
+        width:'100vw'
       }}>
       hello
       <motion.div
