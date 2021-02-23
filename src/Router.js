@@ -7,6 +7,7 @@ import {
 import Default from './Default'
 import VideoController from './videoScrub/Controller'
 import GodzillaController from './godzilla/Controller'
+import Test from './spacetime/Test'
 
 
 export default function AppRouter() {
@@ -21,6 +22,9 @@ export default function AppRouter() {
         </Route>
         <Route path='/godzilla'>
           <GodzillaController />
+        </Route>
+        <Route path='/spacetime'>
+          <Test />
         </Route>
       </Switch>
     </Router>

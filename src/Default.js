@@ -82,6 +82,30 @@ export default function Default () {
             lottie scroll demo
           </Link>
         </li>
+        <li
+          sx={{
+            fontFamily:'body',
+            color:'DarkGrey2',
+            fontSize:'2vmin',
+            lineHeight:'3vmin',
+          }}>
+          <Link
+            to='/spacetime'
+            sx={{
+              color:'DarkGrey2',
+              ':visited': {
+                color:'DarkGrey2'
+              },
+              ':hover': {
+                color:'Purple'
+              },
+              ':active': {
+                color:'DarkGrey2'
+              },
+            }}>
+            hooks test
+          </Link>
+        </li>
       </ul>
     </main>
   )

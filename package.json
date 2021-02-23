@@ -10,6 +10,7 @@
     "lodash.debounce": "^4.0.8",
     "lottie-react-web": "^2.2.2",
     "lottie-web": "^5.7.6",
+    "mdx.macro": "^0.2.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
