@@ -55,7 +55,7 @@ export default function Default () {
                 color:'DarkGrey2'
               },
             }}>
-            video scrub via scroll demo
+            video scrub via scroll demo (fail!)
           </Link>
         </li>
         <li
@@ -104,6 +104,30 @@ export default function Default () {
               },
             }}>
             hooks test
+          </Link>
+        </li>
+        <li
+          sx={{
+            fontFamily:'body',
+            color:'DarkGrey2',
+            fontSize:'2vmin',
+            lineHeight:'3vmin',
+          }}>
+          <Link
+            to='/memorygame'
+            sx={{
+              color:'DarkGrey2',
+              ':visited': {
+                color:'DarkGrey2'
+              },
+              ':hover': {
+                color:'Purple'
+              },
+              ':active': {
+                color:'DarkGrey2'
+              },
+            }}>
+            card flip memory game
           </Link>
         </li>
       </ul>
